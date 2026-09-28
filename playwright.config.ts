@@ -13,6 +13,17 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+
+  /* Custom path template to direct snapshots to assignment.spec.ts-snapshots */
+  snapshotPathTemplate: '{testDir}/assignment.spec.ts-snapshots/{arg}{ext}',
+
+  /* Global expect options to prevent CI font-rendering differences from failing tests */
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.05,
+    },
+  },
+
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
